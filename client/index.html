@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belajar Axios</title>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>Belajar Axios</h1>
+  <button onclick="addUser()">add user</button>
+  <button onclick="updateUser()">update user</button>
+  <button onclick="deleteUser()">delete user</button>
+  <script>
+    const myInstance = axios.create({
+      baseURL: "http://localhost:3000",
+    });
+
+    // myInstance
+    // .get("/users")
+    // .then(({ data }) => {
+    //   console.log("🚀 ~ file: index.html ~ line 17 ~ response", data);
+    // })
+    // .catch((err) => {
+    //   console.log("🚀 ~ file: index.html ~ line 17 ~ response", err);
+    // })
+    // .finally(() => {
+    //   console.log("request selesai");
+    // })
+
+    function addUser() {
+      const newUser = {
+        "name": "Ajat",
+        "email": "ajat@mail.com"
+      };
+
+      myInstance
+      .post("/users", newUser)
+      .then(({ data }) => {
+        console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+      })
+      .catch((err) => {
+        console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+      })
+      .finally(() => {
+        console.log("request selesai");
+      });
+    }
+
+    function updateUser(){
+      const updateUser = {
+        name: "Kosasih updated",
+        email: "kosasihupdate@mail.com",
+      };
+      const userId = 2;
+    myInstance({
+        method: "PUT",
+        url: `/users/${userId}`,
+        data: updateUser,
+      })
+        .then(({ data }) => {
+          console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+        })
+        .catch((err) => {
+          console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+        })
+        .finally(() => {
+          console.log("request selesai");
+        });
+      }
+
+    function deleteUser(){
+      const userId = 5;
+
+      myInstance
+        .delete(`/users/${userId}`)
+        .then(({ data }) => {
+          console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+        })
+        .catch((err) => {
+          console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+        })
+        .finally(() => {
+          console.log("request selesai");
+        });
+    }
+  
+
+    // 4 method axios
+
+    // // 1. method get
+    // axios
+    // .get("http://localhost:3000/users")
+    // .then(({ data }) => {
+    //   console.log("🚀 ~ file: index.html ~ line 17 ~ response", data);
+    // })
+    // .catch((err) => {
+    //   console.log("🚀 ~ file: index.html ~ line 17 ~ response", err);
+    // })
+    // .finally(() => {
+    //   console.log("request selesai");
+    // })
+
+    
+    // // 2. method post, digunakan untuk mengirimkan data dari client ke server
+    // function addUser() {
+    //   const newUser = {
+    //     "name": "Ajat",
+    //     "email": "ajat@mail.com"
+    //   };
+
+    //   axios
+    //   .post("http://localhost:3000/users", newUser)
+    //   .then(({ data }) => {
+    //     console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+    //   })
+    //   .catch((err) => {
+    //     console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+    //   })
+    //   .finally(() => {
+    //     console.log("request selesai");
+    //   });
+    // }
+
+
+    // // // 3. method put, digunakan untuk mengupdate keseluruhan sebuah data
+    // function updateUser(){
+    //   const updateUser = {
+    //     name: "Kosasih updated",
+    //     email: "kosasihupdate@mail.com",
+    //   };
+
+    //   const userId = 2;
+
+    //   axios
+    //     .put(`http://localhost:3000/users/${userId}`, updateUser)
+    //     .then(({ data }) => {
+    //       console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+    //     })
+    //     .catch((err) => {
+    //       console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+    //     })
+    //     .finally(() => {
+    //       console.log("request selesai");
+    //     });
+    // }
+
+
+    // // 4. methode delete, digunakan client untuk menghapus data dari server
+    // function deleteUser(){
+    //   const userId = 5;
+
+    //   axios
+    //     .delete(`http://localhost:3000/users/${userId}`)
+    //     .then(({ data }) => {
+    //       console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+    //     })
+    //     .catch((err) => {
+    //       console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+    //     })
+    //     .finally(() => {
+    //       console.log("request selesai");
+    //     });
+    // }
+  
+
+    // // axios request config
+    // function updateUser(){
+    //   const updateUser = {
+    //     name: "Kosasih",
+    //     email: "kosasih@mail.com",
+    //   };
+
+    //   const userId = 2;
+
+    //   axios({
+    //     method: "PUT",
+    //     url: `http://localhost:3000/users/${userId}`,
+    //     data: updateUser,
+    //   })
+    //     .then(({ data }) => {
+    //       console.log("🚀 ~ file: index.html ~ line 34 ~ .then ~ data", data);
+    //     })
+    //     .catch((err) => {
+    //       console.log("🚀 ~ file: index.html ~ line 36 ~ .addUser ~ err", err);
+    //     })
+    //     .finally(() => {
+    //       console.log("request selesai");
+    //     });
+    // }
+  </script>
+</body>
+</html>
